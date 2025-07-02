@@ -8,11 +8,12 @@ import (
 	"github.com/IBM/sarama"
 )
 
-func SendLogToKafka(producer sarama.SyncProducer, service, level, message string) error {
+func SendLogToKafka(producer sarama.SyncProducer, service, level, message, place string) error {
 	logEntry := map[string]interface{}{
 		"level":     level,
 		"service":   service,
 		"message":   message,
+		"place":     place,
 		"timestamp": time.Now().Format(time.RFC3339),
 	}
 	msgBytes, errorJson := json.Marshal(logEntry)
